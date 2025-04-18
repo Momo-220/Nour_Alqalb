@@ -1,13 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaBook, FaQuran, FaBookOpen, FaPrayingHands, FaRegCalendarAlt, FaMosque, FaUsers } from "react-icons/fa";
-import { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
-
-export const metadata: Metadata = {
-  title: "Ressources Islamiques | Duas & Invocations",
-  description: "Explorez notre collection de ressources islamiques sur les duas, le Quran, et plus",
-};
 
 interface ResourceCardProps {
   title: string;

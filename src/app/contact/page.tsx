@@ -6,12 +6,6 @@ import { FaArrowLeft, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaStar, FaInstagra
 import { motion } from 'framer-motion';
 import Logo from '@/components/Logo';
 
-// Remplacer le titre et la description pour la page Contact
-export const metadata = {
-  title: 'Contactez-nous | Nour Al-Qalb',
-  description: 'Contactez l\'équipe de Nour Al-Qalb pour toute question, suggestion ou retour concernant notre application de duas islamiques.',
-};
-
 export default function ContactPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
