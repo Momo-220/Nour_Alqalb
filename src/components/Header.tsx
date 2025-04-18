@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { FaHeart, FaCalculator, FaInfoCircle, FaQuran, FaSearch, FaSun, FaMoon } from "react-icons/fa";
+import { FaHeart, FaCalculator, FaInfoCircle, FaQuran, FaSearch } from "react-icons/fa";
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import Logo from './Logo';
-import { useTheme } from '@/context/ThemeContext';
 
 // Import dynamique du composant MobileNav
 const MobileNav = dynamic(() => import('./MobileNav'), {
@@ -51,7 +50,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname() || '';
-  const { theme, toggleTheme } = useTheme();
 
   // Effet pour détecter le défilement
   useEffect(() => {
@@ -85,16 +83,7 @@ export default function Header() {
             <NavLinks pathname={pathname} />
           </div>
           
-          <div className="flex items-center space-x-4">
-            {/* Bouton de basculement de thème */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Basculer le thème"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-900/20 text-amber-400 hover:bg-amber-900/30 transition-colors"
-            >
-              {theme === 'dark' ? <FaSun /> : <FaMoon />}
-            </button>
-            
+          <div className="flex items-center">
             <button
               onClick={toggleMenu}
               className={`md:hidden w-10 h-10 relative focus:outline-none z-50 ${isMenuOpen ? 'text-white' : 'text-amber-400'}`}

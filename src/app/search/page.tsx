@@ -121,6 +121,18 @@ function SearchPageContent() {
     document.getElementById('search-button')?.click();
   };
 
+  // Ajoutons une fonction pour formater le texte Markdown simple (** pour le gras)
+  const formatMarkdown = (text: string) => {
+    // Remplacer les ** pour le texte en gras
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  };
+
+  // Fonction pour afficher un paragraphe avec formatage Markdown
+  const renderFormattedText = (text: string, key: number) => {
+    const formattedText = formatMarkdown(text);
+    return <p key={key} className="leading-relaxed" dangerouslySetInnerHTML={{ __html: formattedText }} />;
+  };
+
   // Si le composant n'est pas encore monté côté client, afficher un placeholder
   if (!mounted) {
     return <Loading />;
@@ -158,27 +170,27 @@ function SearchPageContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-5xl font-amiri text-amber-400 mb-3">
+          <h1 className="text-6xl font-amiri text-amber-400 mb-4">
             استكشاف
           </h1>
           
           <div className="flex justify-center items-center mb-6">
-            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+            <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
             <div className="mx-3 text-amber-500 relative">
               <FaStar className="text-amber-500 rotate-45 absolute -top-2 -left-2 opacity-30 text-xs" />
               <span>✧</span>
               <FaStar className="text-amber-500 rotate-12 absolute -bottom-2 -right-2 opacity-30 text-xs" />
             </div>
-            <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
+            <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
           </div>
           
           <h2 className="text-3xl text-amber-400 mb-6 font-playfair">
             Assistant Islamique
           </h2>
           
-          <p className="text-amber-200/80 max-w-2xl mx-auto">
+          <p className="text-amber-200/80 max-w-2xl mx-auto text-lg font-light leading-relaxed">
             Posez vos questions sur l'islam, les pratiques religieuses et la spiritualité. 
             Notre assistant intelligent vous apportera des réponses basées sur le Coran et les hadiths authentiques.
           </p>
@@ -210,25 +222,15 @@ function SearchPageContent() {
               />
             </div>
             
-            <div className="flex mt-4 gap-3">
+            <div className="flex mt-4">
               <button
                 id="search-button"
                 type="submit"
                 disabled={isLoading}
-                className="flex-1 py-3 bg-gradient-to-r from-amber-700 to-amber-600 text-white rounded-lg hover:from-amber-600 hover:to-amber-500 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-gradient-to-r from-amber-700 to-amber-600 text-white rounded-lg hover:from-amber-600 hover:to-amber-500 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <FaSearch />
                 <span>Rechercher</span>
-              </button>
-              
-              <button
-                type="button"
-                onClick={handleGenerateDua}
-                disabled={isLoading || !query.trim()}
-                className="flex-1 py-3 bg-gradient-to-r from-amber-800 to-amber-700 text-white rounded-lg hover:from-amber-700 hover:to-amber-600 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                <FaPaperPlane />
-                <span>Générer une Du'a</span>
               </button>
             </div>
           </form>
@@ -296,41 +298,49 @@ function SearchPageContent() {
                 className="bg-[#0E0700] rounded-xl overflow-hidden border border-amber-900/30 shadow-xl mb-12"
               >
                 <div className="p-6 md:p-8">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-amber-800 flex items-center justify-center">
-                        <FaQuoteRight className="text-amber-200 text-xs" />
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center shadow-md">
+                        <FaQuoteRight className="text-amber-100 text-sm" />
                       </div>
-                      <h3 className="text-xl font-medium text-amber-400">Réponse</h3>
+                      <h3 className="text-2xl font-amiri text-amber-400">Réponse</h3>
                     </div>
-                    <div className="bg-amber-900/20 px-2.5 py-1 rounded-full text-xs text-amber-400 flex items-center gap-1">
+                    <div className="bg-amber-900/20 px-3 py-1.5 rounded-full text-xs font-medium text-amber-300 flex items-center gap-2 shadow-inner">
                       <FaStar className="text-amber-400" />
                       <span>Confiance: {response.confidenceLevel || "Moyenne"}</span>
                     </div>
                   </div>
                   
-                  <div className="mb-6 text-amber-100 leading-relaxed relative">
+                  <div className="mb-8 text-amber-100/90 leading-relaxed relative text-lg font-light">
                     {isTyping ? (
-                      <div>
-                        <p>{typingText}</p>
-                        <span className="inline-block w-2 h-4 bg-amber-400 ml-1 animate-blink"></span>
+                      <div className="font-light">
+                        <p className="mb-4 leading-relaxed">{typingText}</p>
+                        <span className="inline-block w-2 h-5 bg-amber-400 ml-1 animate-blink"></span>
                       </div>
                     ) : (
-                      <p>{response.answer}</p>
+                      <div className="space-y-5">
+                        {response.answer.split('\n\n').map((paragraph: string, idx: number) => (
+                          renderFormattedText(paragraph, idx)
+                        ))}
+                      </div>
                     )}
                   </div>
                   
                   {/* Références au Coran et Hadith */}
                   {response.sources && response.sources.length > 0 && (
-                    <div className="mt-6 border-t border-amber-900/30 pt-4">
-                      <h4 className="text-sm font-medium text-amber-400 mb-2">Sources:</h4>
-                      <ul className="text-sm text-amber-200/80 space-y-2">
+                    <div className="mt-8 border-t border-amber-900/20 pt-6">
+                      <h4 className="text-sm uppercase tracking-wider font-medium text-amber-500 mb-4">Sources:</h4>
+                      <ul className="text-sm text-amber-200/80 space-y-3">
                         {response.sources.map((source: any, index: number) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-900/30 flex items-center justify-center mt-0.5">
-                              <FaBookmark className="text-amber-500 text-xs" />
+                          <li key={index} className="flex items-start gap-3 bg-amber-950/30 p-3 rounded-lg border border-amber-900/20">
+                            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-r from-amber-900 to-amber-800 flex items-center justify-center mt-0.5 shadow-sm">
+                              <FaBookmark className="text-amber-400 text-xs" />
                             </div>
-                            <span>{source}</span>
+                            <span className="font-light pt-1">
+                              {typeof source === 'string' 
+                                ? source 
+                                : `${source.title || ''} ${source.reference || ''}`}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -338,18 +348,14 @@ function SearchPageContent() {
                   )}
                 </div>
                 
-                <div className="bg-[#0B0500] border-t border-amber-900/20 p-4 flex justify-between items-center">
+                <div className="bg-[#0B0500] border-t border-amber-900/30 p-4 flex justify-between items-center backdrop-blur-sm">
                   <button 
                     onClick={() => copyToClipboard(response.answer)}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-amber-900/20 hover:bg-amber-900/30 rounded-full text-amber-300 text-sm transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-amber-800/30 hover:bg-amber-800/50 rounded-full text-amber-300 text-sm transition-colors shadow-sm"
                   >
                     <FaCopy className="text-xs" />
-                    <span>Copier</span>
+                    <span>Copier la réponse</span>
                   </button>
-                  
-                  <div className="flex items-center gap-2">
-                    {/* Autres boutons d'action ici si nécessaire */}
-                  </div>
                 </div>
               </motion.div>
             )}
