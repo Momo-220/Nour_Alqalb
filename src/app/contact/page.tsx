@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
 import { FaArrowLeft, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaStar, FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa';
@@ -51,7 +53,7 @@ export default function ContactPage() {
             </Link>
             
             <div className="flex justify-center">
-              <Logo size={40} />
+              <Logo size="md" />
             </div>
             
             <div className="w-[110px]"></div>
@@ -169,6 +171,7 @@ export default function ContactPage() {
                     whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(180, 120, 40, 0.15)" }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-800/90 via-amber-700/90 to-amber-800/90 text-amber-100 py-3 px-6 rounded-lg transition-all text-lg font-medium shadow-md mt-4"
+                    type="button"
                   >
                     Envoyer le message
                   </motion.button>
@@ -254,7 +257,7 @@ export default function ContactPage() {
                     <motion.a 
                       href="#" 
                       target="_blank" 
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -3 }}
                       className="w-10 h-10 rounded-full bg-amber-900/20 flex items-center justify-center border border-amber-800/30 text-amber-500 hover:text-amber-300 transition-all"
                     >
@@ -264,7 +267,7 @@ export default function ContactPage() {
                     <motion.a 
                       href="#" 
                       target="_blank" 
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -3 }}
                       className="w-10 h-10 rounded-full bg-amber-900/20 flex items-center justify-center border border-amber-800/30 text-amber-500 hover:text-amber-300 transition-all"
                     >
