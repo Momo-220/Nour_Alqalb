@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Du'as & Invocations Islamiques
 
-## Getting Started
+Une application web élégante et moderne qui génère des du'as et invocations islamiques à la demande des utilisateurs en utilisant l'API OpenAI.
 
-First, run the development server:
+## Fonctionnalités
+
+- Génération de du'as personnalisées basées sur l'intention ou la situation de l'utilisateur
+- Design minimaliste et moderne avec un thème noir et doré
+- Texte en arabe, translittération phonétique et traduction française
+- Interface utilisateur intuitive et responsive
+
+## Technologies utilisées
+
+- **Next.js** - Framework React pour le développement d'applications web
+- **TypeScript** - Super-ensemble JavaScript avec vérification de type
+- **Tailwind CSS** - Framework CSS utilitaire
+- **OpenAI API** - Pour la génération de contenu
+
+## Installation
 
 ```bash
+# Cloner le dépôt
+git clone https://github.com/votrecompte/islamic-duas-app.git
+cd islamic-duas-app
+
+# Installer les dépendances
+npm install
+
+# Copier le fichier .env.example en .env.local et ajouter votre clé API OpenAI
+cp .env.example .env.local
+
+# Démarrer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Vous devez configurer une clé API OpenAI dans le fichier `.env.local` :
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+OPENAI_API_KEY=votre_cle_api_openai_ici
+```
 
-## Learn More
+## Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+islamic-duas-app/
+├── public/               # Fichiers statiques
+├── src/                  # Code source
+│   ├── app/              # Pages de l'application
+│   │   ├── api/          # Routes API
+│   │   ├── about/        # Page À propos
+│   │   ├── globals.css   # Styles globaux
+│   │   ├── layout.tsx    # Layout principal
+│   │   └── page.tsx      # Page d'accueil
+│   └── components/       # Composants réutilisables
+├── .env.local            # Variables d'environnement locales
+├── package.json          # Dépendances et scripts
+└── README.md             # Documentation
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+L'application peut être facilement déployée sur Vercel :
 
-## Deploy on Vercel
+```bash
+npm install -g vercel
+vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contribution
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+
+## Licence
+
+MIT

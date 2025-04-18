@@ -1,26 +1,3478 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500&family=Amiri:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-primary: #0f0f0f;
+  --background-secondary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --gold: #be963c;
+  --gold-light: #d4af37;
+  --gold-dark: #8b6b2c;
+  --dark-bg: #0a0a0a;
+  --dark-card: #111111;
+  --dark-border: #2a2a2a;
+  --dark-input: #151515;
+  --transition-smooth: all 0.3s ease;
+  --border-radius: 0;
+  --bismillah-color: #c19d56;
+  --quran-gold: #d4af37;
+  --mosque-green: #0d5c3e;
+  --minaret-shadow: rgba(173,127,49,0.3);
+  --gold-rgb: 190, 150, 60;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --gold: rgb(190, 150, 60);
+  --gold-light: rgb(212, 175, 95);
+  --gold-dark: rgb(153, 122, 50);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  .gold-text {
+    @apply text-[var(--gold)];
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .elegant-card {
+    @apply rounded-xl p-8 backdrop-blur-sm border-2 shadow-lg;
+  }
+
+  .gold-ornament-top, .gold-ornament-bottom {
+    @apply text-[var(--gold)] text-4xl opacity-70;
+  }
+
+  .typing-cursor {
+    @apply animate-pulse text-[var(--gold)];
   }
 }
 
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-[var(--gold-dark)] via-[var(--gold)] to-[var(--gold-light)] text-white rounded-lg 
+    font-semibold shadow-lg hover:opacity-90 transition-all duration-300 disabled:opacity-50;
+  }
+
+  .icon-button {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--gold)] text-[var(--gold)] 
+    hover:bg-[var(--gold)] hover:text-white transition-all duration-300;
+  }
+
+  .nav-link {
+    @apply text-[var(--text-secondary)] hover:text-[var(--gold)] transition-colors duration-300 mx-4;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #333;
+  max-width: 100vw;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  display: none;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.arabic-font {
+  font-family: "Noto Naskh Arabic", serif;
+  direction: rtl;
+  line-height: 2;
+  font-size: 1.25rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+/* Animation du curseur de typing */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Animation de typing */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Effet de gradient doré */
+.gold-gradient {
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Style pour les suggestions */
+.suggestion-card {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: left;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  width: 100%;
+}
+
+.suggestion-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.suggestion-card h3 {
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+}
+
+/* Style pour la translittération */
+.font-arabic-transliteration {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  margin: 1.5rem 0;
+}
+
+/* Amélioration du conteneur de dua */
+.dua-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Animation de fade pour les suggestions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestions-container {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  animation-delay: 1.5s;
+}
+
+.context-card {
+  @apply bg-[var(--bg-secondary)] p-6 rounded-lg shadow-lg;
+  border: 1px solid var(--gold);
+}
+
+.related-dua-card {
+  @apply bg-[var(--bg-secondary)] p-4 rounded-lg shadow-md;
+  border: 1px solid var(--gold);
+  transition: transform 0.2s ease-in-out;
+}
+
+.related-dua-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Styles spécifiques pour le texte arabe */
+.arabic-dua {
+  font-family: var(--font-amiri), 'Amiri', serif;
+  direction: rtl;
+  line-height: 2;
+  text-align: center;
+}
+
+/* Bouton principal doré */
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Champ de recherche avec bordure dorée */
+.search-input {
+  width: 100%;
+  background-color: var(--dark-input);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--border-radius);
+  padding: 1rem 1.5rem;
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(213, 181, 97, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Séparateur doré */
+.gold-separator {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  width: 100%;
+  margin: 2rem 0;
+  opacity: 0.3;
+}
+
+/* Section titre principale */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 4rem 0 2rem;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navigation */
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .elegant-card {
+    padding: 1.5rem;
+  }
+  
+  .arabic-dua {
+    font-size: 1.6rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Styles pour les listes */
+.custom-list {
+  @apply space-y-3;
+}
+
+.custom-list-item {
+  @apply flex items-start;
+}
+
+.custom-list-bullet {
+  @apply text-[var(--gold)] mr-3 mt-1.5 text-lg;
+}
+
+/* Espacement des sections */
+.section-spacing {
+  @apply space-y-8 md:space-y-12;
+}
+
+/* Carte avec bordure dorée */
+.gold-bordered-card {
+  @apply p-6 border border-[var(--gold)] bg-[rgba(173,127,49,0.03)] rounded-lg;
+}
+
+/* Titre de section avec ornements */
+.section-title {
+  @apply text-[var(--gold)] text-xl mb-4 font-semibold flex items-center;
+}
+
+.section-title-ornament {
+  @apply mr-2 text-[var(--gold)] opacity-70;
+}
+
+/* Espacement du texte */
+.text-content {
+  @apply leading-relaxed tracking-wide;
+}
+
+/* Animation de transition douce */
+.smooth-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Espacement des paragraphes */
+p {
+  @apply mb-4 last:mb-0;
+}
+
+/* Espacement des titres */
+h1, h2, h3, h4, h5, h6 {
+  @apply mb-6;
+}
+
+/* Espacement des listes */
+ul, ol {
+  @apply mb-6 last:mb-0;
+}
+
+/* Espacement des éléments de liste */
+li {
+  @apply mb-2 last:mb-0;
+}
+
+/* Style des puces personnalisées */
+.bullet-point {
+  @apply inline-block w-1.5 h-1.5 rounded-full bg-[var(--gold)] mr-2 opacity-70;
+}
+
+/* Style amélioré pour les titres de sections */
+.section-title-decorated {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin: 2rem 0 1.5rem;
+  padding: 0 3rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.section-title-decorated::before,
+.section-title-decorated::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(173, 127, 49, 0), rgba(173, 127, 49, 0.7), rgba(173, 127, 49, 0));
+}
+
+.section-title-decorated::before {
+  background: linear-gradient(90deg, rgba(173, 127, 49, 0), rgba(173, 127, 49, 0.7));
+}
+
+.section-title-decorated::after {
+  background: linear-gradient(90deg, rgba(173, 127, 49, 0.7), rgba(173, 127, 49, 0));
+}
+
+/* Decorative diamond ornaments on titles */
+.section-title-ornament {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.section-title-ornament span {
+  color: var(--gold);
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0 1.5rem;
+  z-index: 2;
+  background-color: white;
+}
+
+.section-title-ornament::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 1;
+}
+
+.section-title-ornament::after {
+  content: "◆";
+  color: var(--gold);
+  font-size: 0.75rem;
+  position: absolute;
+  background-color: white;
+  padding: 0 0.5rem;
+  z-index: 2;
+}
+
+.section-title-ornament .ornament-left,
+.section-title-ornament .ornament-right {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+
+.section-title-ornament .ornament-left {
+  left: calc(25% - 5px);
+}
+
+.section-title-ornament .ornament-right {
+  right: calc(25% - 5px);
+}
+
+/* Ornements pour les titres */
+.section-title-decorated::before {
+  content: '❈';
+  @apply absolute -top-4 left-1/2 transform -translate-x-1/2 text-2xl text-[var(--gold)] opacity-70;
+}
+
+/* Cadre décoratif amélioré pour les sections */
+.decorated-frame {
+  @apply border-2 border-[var(--gold)] rounded-lg p-8 my-12 relative mx-auto max-w-3xl;
+  background: linear-gradient(180deg, 
+    rgba(173,127,49,0.08) 0%, 
+    rgba(173,127,49,0.02) 100%
+  );
+  box-shadow: 0 0 20px rgba(173,127,49,0.05);
+}
+
+.decorated-frame::before,
+.decorated-frame::after {
+  content: '◈';
+  @apply absolute text-[var(--gold)] text-2xl opacity-60;
+}
+
+.decorated-frame::before {
+  @apply -top-4 left-1/2 transform -translate-x-1/2;
+}
+
+.decorated-frame::after {
+  @apply -bottom-4 left-1/2 transform -translate-x-1/2;
+}
+
+/* Style amélioré pour le texte arabe */
+.main-arabic-text {
+  @apply text-5xl md:text-6xl lg:text-7xl font-amiri text-center py-20 px-12 my-16 relative;
+  direction: rtl;
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(173,127,49,0.3);
+  letter-spacing: 0.02em;
+}
+
+/* Amélioration du conteneur arabe */
+.arabic-container {
+  @apply relative my-16 mx-auto max-w-4xl;
+  perspective: 1200px;
+}
+
+.arabic-inner {
+  @apply relative p-16 bg-[rgba(173,127,49,0.03)] rounded-lg;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: transform 0.4s ease;
+}
+
+.arabic-inner:hover {
+  transform: translateZ(30px) scale(1.02);
+}
+
+/* Style amélioré pour la translittération */
+.transliteration-text {
+  @apply text-2xl md:text-3xl font-scheherazade text-center tracking-wider my-12 mx-auto max-w-3xl;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* Amélioration des listes décorées */
+.decorated-list {
+  @apply space-y-6 my-8 mx-auto max-w-2xl;
+}
+
+.decorated-list-item {
+  @apply flex items-start space-x-4 text-[var(--text-secondary)] text-lg leading-relaxed;
+  padding-left: 2rem;
+}
+
+.decorated-list-item::before {
+  content: '•';
+  @apply text-[var(--gold)] text-2xl leading-none mt-1 absolute -left-4;
+}
+
+/* Espacement des sections */
+.dua-section {
+  @apply mb-12 last:mb-0;
+}
+
+/* Style pour les sous-titres */
+.subtitle-decorated {
+  @apply text-lg font-semibold text-[var(--gold)] mb-4 flex items-center;
+}
+
+.subtitle-decorated::before {
+  content: '•';
+  @apply mr-2 opacity-70;
+}
+
+/* Cadre islamique élégant pour la dua */
+.islamic-frame {
+  @apply relative p-16 my-12 mx-auto max-w-4xl;
+  background: linear-gradient(to bottom,
+    rgba(173,127,49,0.05),
+    rgba(173,127,49,0.02)
+  );
+}
+
+/* Double bordure dorée */
+.islamic-frame::before,
+.islamic-frame::after {
+  content: '';
+  @apply absolute inset-0;
+  border: 2px solid var(--gold);
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+.islamic-frame::before {
+  transform: scale(0.98);
+  opacity: 0.7;
+}
+
+.islamic-frame::after {
+  transform: scale(1.02);
+  opacity: 0.3;
+}
+
+/* Ornements en diamant aux coins */
+.corner-diamond {
+  @apply absolute w-8 h-8 text-[var(--gold)];
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.corner-diamond::before {
+  content: '◈';
+}
+
+.corner-top-left {
+  top: -1rem;
+  left: -1rem;
+}
+
+.corner-top-right {
+  top: -1rem;
+  right: -1rem;
+}
+
+.corner-bottom-left {
+  bottom: -1rem;
+  left: -1rem;
+}
+
+.corner-bottom-right {
+  bottom: -1rem;
+  right: -1rem;
+}
+
+/* Griffes décoratives */
+.decorative-claw {
+  @apply absolute w-6 h-6 text-[var(--gold)];
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+
+.decorative-claw::before {
+  content: '❯';
+}
+
+.claw-top-left {
+  top: 1rem;
+  left: 1rem;
+  transform: rotate(-45deg);
+}
+
+.claw-top-right {
+  top: 1rem;
+  right: 1rem;
+  transform: rotate(45deg);
+}
+
+.claw-bottom-left {
+  bottom: 1rem;
+  left: 1rem;
+  transform: rotate(-135deg);
+}
+
+.claw-bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+  transform: rotate(135deg);
+}
+
+/* Bordure intérieure avec motif islamique */
+.islamic-border {
+  position: relative;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: rgba(173, 127, 49, 0.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ombre dorée */
+.golden-shadow {
+  box-shadow: 
+    0 0 20px rgba(173,127,49,0.1),
+    0 0 40px rgba(173,127,49,0.05);
+}
+
+/* Container pour le texte arabe avec effet de profondeur */
+.arabic-container {
+  @apply relative my-12 mx-auto max-w-4xl;
+  perspective: 1000px;
+}
+
+.arabic-inner {
+  @apply relative p-12 rounded-lg;
+  background: linear-gradient(
+    to bottom,
+    rgba(173,127,49,0.08),
+    rgba(173,127,49,0.02)
+  );
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
+
+/* Style amélioré pour le texte arabe */
+.main-arabic-text {
+  @apply text-5xl md:text-6xl lg:text-7xl font-amiri text-center py-16 relative;
+  direction: rtl;
+  color: var(--gold);
+  text-shadow: 
+    0 0 15px rgba(173,127,49,0.2),
+    0 0 30px rgba(173,127,49,0.1);
+  letter-spacing: 0.02em;
+  line-height: 2;
+}
+
+/* Styles pour le cadre arabe avec griffes */
+.arabic-frame {
+  position: relative;
+  padding: 3rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(173,127,49,0.05), rgba(173,127,49,0.1));
+  overflow: hidden;
+}
+
+.arabic-background {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(173,127,49,0.1), transparent);
+  opacity: 0.5;
+}
+
+.arabic-corner {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--gold);
+  opacity: 0.6;
+}
+
+.arabic-corner-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.arabic-corner-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.arabic-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.arabic-corner-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.arabic-claw {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--gold);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  opacity: 0.4;
+}
+
+.arabic-claw-tl {
+  top: 0.5rem;
+  left: 0.5rem;
+  transform: rotate(45deg);
+}
+
+.arabic-claw-tr {
+  top: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(135deg);
+}
+
+.arabic-claw-bl {
+  bottom: 0.5rem;
+  left: 0.5rem;
+  transform: rotate(-45deg);
+}
+
+.arabic-claw-br {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(-135deg);
+}
+
+.arabic-text {
+  position: relative;
+  font-family: 'Amiri', serif;
+  font-size: 2rem;
+  line-height: 2;
+  text-align: center;
+  color: var(--gold);
+  text-shadow: 0px 0px 1px rgba(184, 134, 11, 0.2), 
+               0px 0px 3px rgba(184, 134, 11, 0.1);
+  transition: all 0.3s ease;
+}
+
+.arabic-text:hover {
+  transform: translateZ(5px);
+  text-shadow: 0px 0px 2px rgba(184, 134, 11, 0.3),
+               0px 0px 5px rgba(184, 134, 11, 0.2);
+}
+
+@keyframes textAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.decorated-separator {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0), 
+    rgba(184, 134, 11, 0.3), 
+    rgba(255, 255, 255, 0));
+  margin: 1.5rem auto;
+  width: 70%;
+  position: relative;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+.decorated-separator::before,
+.decorated-separator::after {
+  content: "❖";
+  position: absolute;
+  top: 50%;
+  font-size: 0.8rem;
+  transform: translateY(-50%);
+  color: rgba(184, 134, 11, 0.6);
+}
+
+.decorated-separator::before {
+  left: -15px;
+}
+
+.decorated-separator::after {
+  right: -15px;
+}
+
+/* Styles pour les sections */
+.section-title-decorated {
+  font-size: 1.5rem;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.section-title-decorated::before,
+.section-title-decorated::after {
+  content: '❖';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  opacity: 0.6;
+  font-size: 1rem;
+}
+
+.section-title-decorated::before {
+  left: 0;
+}
+
+.section-title-decorated::after {
+  right: 0;
+}
+
+.decorated-frame {
+  border: 1px solid rgba(173,127,49,0.2);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background: rgba(173,127,49,0.03);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.decorated-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.decorated-list-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.decorated-list-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.decorated-separator {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(173,127,49,0.3) 20%,
+    rgba(173,127,49,0.5) 50%,
+    rgba(173,127,49,0.3) 80%,
+    transparent
+  );
+  margin: 2rem 0;
+  position: relative;
+}
+
+.decorated-separator::before,
+.decorated-separator::after {
+  content: '◈';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  opacity: 0.6;
+  font-size: 0.75rem;
+}
+
+.decorated-separator::before {
+  left: calc(50% - 3rem);
+}
+
+.decorated-separator::after {
+  right: calc(50% - 3rem);
+}
+
+/* Effets de survol */
+.btn-outline {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--gold);
+  color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(173,127,49,0.2);
+}
+
+/* Animation du curseur de typing */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--gold);
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Effet de brillance */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Suppression de l'animation en diagonale */
+.shine-effect::after {
+  display: none;  /* On masque l'élément au lieu de l'animer */
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* Styles pour le texte */
+.transliteration-text {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin: 2rem 0;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+}
+
+/* Styles islamiques ornementaux */
+.islamic-ornament {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.islamic-ornament::before,
+.islamic-ornament::after {
+  content: "";
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  flex-grow: 1;
+  margin: 0 1rem;
+}
+
+.islamic-ornament-symbol {
+  color: var(--gold);
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.5rem;
+}
+
+/* Séparateur de fin de section (comme à la fin d'une sourate) */
+.surah-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem auto;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+}
+
+.surah-end::before {
+  content: "۝";
+  font-size: 2rem;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  background: radial-gradient(circle, rgba(173,127,49,0.15) 0%, rgba(10,10,10,0) 70%);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.surah-end::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 1;
+}
+
+/* Style pour les sections */
+.islamic-section {
+  position: relative;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  background-color: rgba(173, 127, 49, 0.03);
+  border: 1px solid rgba(173, 127, 49, 0.1);
+}
+
+.islamic-section::before,
+.islamic-section::after {
+  content: "◈";
+  position: absolute;
+  color: var(--gold);
+  opacity: 0.6;
+  font-size: 1.25rem;
+}
+
+.islamic-section::before {
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark-bg);
+  padding: 0 1rem;
+}
+
+.islamic-section::after {
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--dark-bg);
+  padding: 0 1rem;
+}
+
+/* Style pour les titres islamiques */
+.islamic-title {
+  text-align: center;
+  position: relative;
+  padding: 0 2rem;
+  margin: 2rem 0;
+  color: var(--gold);
+}
+
+.islamic-title::before,
+.islamic-title::after {
+  content: "☾";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.islamic-title::before {
+  left: 0;
+}
+
+.islamic-title::after {
+  right: 0;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Motif géométrique islamique */
+.islamic-pattern {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.islamic-pattern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-image: none;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Bismillah calligraphie */
+.bismillah {
+  font-family: 'Amiri', serif;
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 0;
+  color: var(--gold);
+  line-height: 1.6;
+  direction: rtl;
+}
+
+/* Badge de sourate */
+.surah-badge {
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold));
+  color: black;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  box-shadow: 0 2px 10px rgba(173, 127, 49, 0.3);
+}
+
+/* Animation du symbole de la fin sourate */
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(173, 127, 49, 0.3);
+  }
+  50% { 
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(173, 127, 49, 0.5);
+  }
+}
+
+.surah-end-animated::before {
+  animation: glow 3s infinite ease-in-out;
+}
+
+/* ====== BORDURES ET CADRES ISLAMIQUES ====== */
+
+/* Cadre de page coranique */
+.quran-frame {
+  position: relative;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+  background-color: rgba(173, 127, 49, 0.01);
+  box-shadow: 0 0 20px rgba(173, 127, 49, 0.03);
+}
+
+.quran-frame::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Bordure islamique avec motif géométrique */
+.islamic-border {
+  position: relative;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: rgba(173, 127, 49, 0.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== SÉPARATEURS ET ORNEMENTS ====== */
+
+/* Ornement arabesque */
+.arabesque-divider {
+  position: relative;
+  height: 40px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.arabesque-divider::before {
+  content: "۞";
+  color: var(--gold);
+  font-size: 2rem;
+  position: relative;
+  z-index: 2;
+  background-color: var(--dark-bg);
+  padding: 0 1.5rem;
+  text-shadow: 0 0 10px rgba(173, 127, 49, 0.3);
+}
+
+.arabesque-divider::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 1;
+}
+
+/* Motif arabesque pour coin */
+.arabesque-corner {
+  position: relative;
+}
+
+.arabesque-corner::before,
+.arabesque-corner::after,
+.arabesque-corner > span::before,
+.arabesque-corner > span::after {
+  content: "☙";
+  position: absolute;
+  color: var(--gold);
+  font-size: 1.5rem;
+  opacity: 0.6;
+  z-index: 5;
+}
+
+.arabesque-corner::before {
+  top: -10px;
+  left: -10px;
+  transform: rotate(-45deg);
+}
+
+.arabesque-corner::after {
+  top: -10px;
+  right: -10px;
+  transform: rotate(45deg);
+}
+
+.arabesque-corner > span::before {
+  bottom: -10px;
+  left: -10px;
+  transform: rotate(-135deg);
+}
+
+.arabesque-corner > span::after {
+  bottom: -10px;
+  right: -10px;
+  transform: rotate(135deg);
+}
+
+/* Séparateur fin de sourate */
+.ayah-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem auto;
+  position: relative;
+  max-width: 500px;
+}
+
+.ayah-end::before {
+  content: "۝";
+  font-size: 2.5rem;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  background: radial-gradient(circle, rgba(173,127,49,0.15) 0%, rgba(10,10,10,0) 70%);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-shadow: 0 0 10px rgba(173, 127, 49, 0.4);
+}
+
+.ayah-end::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 1;
+}
+
+/* Nombre d'ayah dans un cercle doré */
+.ayah-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold));
+  color: black;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 10px rgba(173, 127, 49, 0.3);
+}
+
+/* ====== ÉLÉMENTS TYPOGRAPHIQUES ====== */
+
+/* Titre de sourate */
+.surah-title {
+  position: relative;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--gold);
+  margin: 2.5rem 0;
+  padding: 0 3rem;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.surah-title::before,
+.surah-title::after {
+  content: "۩";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.surah-title::before {
+  left: 0;
+}
+
+.surah-title::after {
+  right: 0;
+}
+
+/* Bismillah calligraphique */
+.bismillah-calligraphy {
+  font-family: 'Amiri', serif;
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 2.5rem 0;
+  color: var(--bismillah-color);
+  line-height: 1.6;
+  direction: rtl;
+  text-shadow: 0 2px 15px rgba(173, 127, 49, 0.2);
+  position: relative;
+  padding: 1rem 0;
+}
+
+.bismillah-calligraphy::before,
+.bismillah-calligraphy::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 150px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='10' viewBox='0 0 150 10'%3E%3Cpath d='M0,5 C25,0 50,10 75,5 C100,0 125,10 150,5' stroke='%23ad7f31' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateX(-50%);
+}
+
+.bismillah-calligraphy::before {
+  top: -5px;
+}
+
+.bismillah-calligraphy::after {
+  bottom: -5px;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+/* Texte arabe élégant */
+.elegant-arabic {
+  font-family: 'Amiri', serif;
+  text-align: center;
+  font-size: 2.2rem;
+  line-height: 2;
+  color: var(--gold);
+  direction: rtl;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  position: relative;
+  text-shadow: 0 2px 10px rgba(173, 127, 49, 0.15);
+}
+
+.elegant-arabic::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--gold);
+  opacity: 0.2;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ====== ARRIÈRE-PLANS ET MOTIFS ====== */
+
+/* Fond de mosquée subtil */
+.mosque-bg {
+  position: relative;
+  background-color: transparent;
+}
+
+.mosque-bg::before {
+  background-image: none;
+}
+
+/* Motif géométrique islamique */
+.geometric-pattern {
+  position: relative;
+  background-color: transparent;
+}
+
+.geometric-pattern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: none;
+  z-index: -1;
+}
+
+/* Animation illumination */
+@keyframes illuminate {
+  0%, 100% { 
+    opacity: 0.7;
+    text-shadow: 0 0 5px rgba(173, 127, 49, 0.3);
+  }
+  50% { 
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(173, 127, 49, 0.6);
+  }
+}
+
+.illuminate {
+  animation: illuminate 4s infinite ease-in-out;
+}
+
+/* Ensure canvas element has proper dimensions */
+.export-mode {
+  position: relative !important;
+  overflow: visible !important;
+  min-width: 300px !important;
+  min-height: 200px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Specific corrections for DuaCard */
+.arabic-frame {
+  position: relative;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  overflow: visible;
+}
+
+.arabic-text {
+  position: relative;
+  z-index: 10;
+  font-family: 'Amiri', serif;
+  font-size: 2rem;
+  line-height: 2;
+  text-align: center;
+  color: var(--gold);
+  text-shadow: 0px 0px 1px rgba(184, 134, 11, 0.2), 
+               0px 0px 3px rgba(184, 134, 11, 0.1);
+  transition: all 0.3s ease;
+}
+
+.arabic-text:hover {
+  transform: translateZ(5px);
+  text-shadow: 0px 0px 2px rgba(184, 134, 11, 0.3),
+               0px 0px 5px rgba(184, 134, 11, 0.2);
+}
+
+@keyframes textAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fix for line-clamp */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Related Duas cards */
+.related-dua-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.related-dua-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.related-dua-card .card-footer {
+  margin-top: auto;
+}
+
+/* Breadcrumb improvements */
+.breadcrumb-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.breadcrumb-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Organization fixes */
+.section-title-decorated {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  font-size: 1.25rem;
+}
+
+.decorated-frame {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: rgba(var(--gold-rgb), 0.05);
+  border: 1px solid rgba(var(--gold-rgb), 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.decorated-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.decorated-list-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.decorated-list-item:before {
+  content: "•";
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.decorated-separator {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0), 
+    rgba(184, 134, 11, 0.3), 
+    rgba(255, 255, 255, 0));
+  margin: 1.5rem auto;
+  position: relative;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+.decorated-separator::before,
+.decorated-separator::after {
+  content: "❖";
+  position: absolute;
+  top: 50%;
+  font-size: 0.8rem;
+  transform: translateY(-50%);
+  color: rgba(184, 134, 11, 0.6);
+}
+
+.decorated-separator::before {
+  left: -15px;
+}
+
+.decorated-separator::after {
+  right: -15px;
+}
+
+/* Related duas improved layout */
+.related-duas-section {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  background-color: rgba(255, 248, 235, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.related-duas-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: linear-gradient(90deg, rgba(218, 165, 32, 0), rgba(218, 165, 32, 0.2) 50%, rgba(218, 165, 32, 0));
+}
+
+.related-duas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.related-dua-card {
+  background: linear-gradient(to bottom, rgba(255, 252, 240, 1), rgba(255, 255, 255, 1));
+  border-radius: 0.75rem;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.related-dua-card::before {
+  content: '❖';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(180, 142, 58, 0.5);
+}
+
+.related-dua-card::after {
+  content: '❖';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(180, 142, 58, 0.5);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(146, 99, 11);
+  padding: 1rem;
+  border-bottom: 1px solid rgba(218, 165, 32, 0.15);
+  position: relative;
+}
+
+.card-arabic {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-arabic);
+  font-size: 1.25rem;
+  line-height: 1.8;
+  padding: 1.25rem;
+  color: rgba(120, 90, 40, 0.9);
+  background-color: rgba(255, 248, 225, 0.5);
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: rgba(255, 250, 235, 0.8);
+  border-top: 1px solid rgba(218, 165, 32, 0.15);
+}
+
+.card-source {
+  font-size: 0.75rem;
+  color: rgba(150, 120, 40, 0.8);
+  display: flex;
+  align-items: center;
+}
+
+.card-action {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(180, 142, 58, 0.9);
+  transition: color 0.2s ease;
+}
+
+.related-dua-card:hover .card-action {
+  color: rgb(180, 142, 58);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .related-duas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: none;
+  background-size: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  line-height: 1.3;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.hero-decoration {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  width: 80px;
+  height: 80px;
+}
+
+.hero-decoration::before {
+  content: "۞";
+  font-size: 2.5rem;
+  color: var(--gold);
+  opacity: 0.8;
+  text-shadow: 0 0 15px rgba(173, 127, 49, 0.3);
+}
+
+/* Cadre doré élégant pour le texte arabe */
+.elegant-golden-frame {
+  position: relative;
+  padding: 2.5rem;
+  margin: 2rem auto;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.elegant-golden-frame::before, 
+.elegant-golden-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark)) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.elegant-golden-frame::after {
+  inset: 4px;
+  opacity: 0.6;
+}
+
+/* Coins ornementés du cadre */
+.elegant-golden-frame .corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+}
+
+.elegant-golden-frame .corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-top: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+  transform: rotate(0deg) translate(-3px, -3px);
+}
+
+.elegant-golden-frame .corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-top: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+  transform: rotate(90deg) translate(-3px, -3px);
+}
+
+.elegant-golden-frame .corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+  transform: rotate(270deg) translate(-3px, -3px);
+}
+
+.elegant-golden-frame .corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+  transform: rotate(180deg) translate(-3px, -3px);
+}
+
+/* Ornements en losange aux coins */
+.elegant-golden-frame .diamond {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--gold);
+  transform: rotate(45deg);
+}
+
+.elegant-golden-frame .diamond.top-left {
+  top: 7px;
+  left: 7px;
+}
+
+.elegant-golden-frame .diamond.top-right {
+  top: 7px;
+  right: 7px;
+}
+
+.elegant-golden-frame .diamond.bottom-left {
+  bottom: 7px;
+  left: 7px;
+}
+
+.elegant-golden-frame .diamond.bottom-right {
+  bottom: 7px;
+  right: 7px;
+}
+
+/* Griffes décoratives pointant vers l'intérieur */
+.elegant-golden-frame .claw {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gold);
+  border-top: none;
+  border-left: none;
+  opacity: 0.7;
+}
+
+.elegant-golden-frame .claw.top-left {
+  top: 15px;
+  left: 15px;
+  transform: rotate(-45deg);
+}
+
+.elegant-golden-frame .claw.top-right {
+  top: 15px;
+  right: 15px;
+  transform: rotate(45deg);
+}
+
+.elegant-golden-frame .claw.bottom-left {
+  bottom: 15px;
+  left: 15px;
+  transform: rotate(-135deg);
+}
+
+.elegant-golden-frame .claw.bottom-right {
+  bottom: 15px;
+  right: 15px;
+  transform: rotate(135deg);
+}
+
+/* Effet brillant sur le texte arabe */
+.elegant-golden-text {
+  position: relative;
+  color: var(--gold);
+  text-align: center;
+  line-height: 2.2;
+  font-size: 1.8rem;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+}
+
+/* Animation d'éclat se déplaçant sur le texte */
+.elegant-golden-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+  animation: shineEffect 6s infinite linear;
+}
+
+@keyframes shineEffect {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* Ombre dorée autour du texte */
+.elegant-golden-text {
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.3), 
+               0 0 10px rgba(255, 215, 0, 0.2), 
+               0 0 15px rgba(255, 215, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+/* Effet 3D au survol */
+.elegant-golden-text:hover {
+  transform: translateZ(5px);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4), 
+               0 0 15px rgba(255, 215, 0, 0.3), 
+               0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Transition d'apparition du texte */
+.fade-in-text {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInText 1.5s forwards;
+}
+
+@keyframes fadeInText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation d'éclat doré */
+@keyframes goldenGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* Animation de transition élégante */
+@keyframes elegantFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Classe pour appliquer l'animation de brillance */
+.golden-glow {
+  animation: goldenGlow 3s infinite ease-in-out;
+}
+
+/* Classe pour appliquer la transition élégante */
+.elegant-fade-in {
+  opacity: 0;
+  animation: elegantFadeIn 1.2s forwards ease-out;
+}
+
+/* Effet de brillance qui se déplace à travers le texte */
+.arabic-shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.arabic-shine-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: arabicShine 5s infinite ease-in-out;
+}
+
+@keyframes arabicShine {
+  0% {
+    left: -100%;
+  }
+  40%, 60% {
+    left: 200%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Effet 3D sur survol */
+.arabic-text-3d {
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.arabic-text-3d:hover {
+  transform: translateY(-3px);
+  text-shadow: 
+    0 1px 0 #cba135,
+    0 2px 0 #b18f31,
+    0 3px 0 #977927,
+    0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ombre dorée subtile */
+.arabic-golden-shadow {
+  text-shadow: 
+    0 0 1px #fff,
+    0 0 2px rgba(255, 215, 0, 0.5),
+    0 0 5px rgba(255, 215, 0, 0.2);
+}
+
+/* Coins élégants arrondis */
+.elegant-corners {
+  border-radius: 8px;
+  position: relative;
+}
+
+.elegant-corners::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid;
+  border-image: linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.7),
+    rgba(255, 215, 0, 0.3),
+    rgba(255, 215, 0, 0.7)
+  ) 1;
+  border-radius: inherit;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Ornements en forme de diamant aux coins */
+.diamond-corners {
+  position: relative;
+}
+
+.diamond-corners::before,
+.diamond-corners::after,
+.diamond-corners .corner-top-right::before,
+.diamond-corners .corner-bottom-left::before {
+  content: '◆';
+  position: absolute;
+  color: rgba(205, 165, 0, 0.7);
+  font-size: 1.2rem;
+  line-height: 1;
+  z-index: 2;
+  filter: drop-shadow(0 0 2px rgba(205, 165, 0, 0.5));
+}
+
+.diamond-corners::before {
+  top: -0.6rem;
+  left: -0.6rem;
+}
+
+.diamond-corners::after {
+  bottom: -0.6rem;
+  right: -0.6rem;
+}
+
+.diamond-corners .corner-top-right::before {
+  top: -0.6rem;
+  right: -0.6rem;
+}
+
+.diamond-corners .corner-bottom-left::before {
+  bottom: -0.6rem;
+  left: -0.6rem;
+}
+
+/* Griffes décoratives pointant vers l'intérieur */
+.decorative-claws {
+  position: relative;
+}
+
+.decorative-claws::before,
+.decorative-claws::after,
+.decorative-claws .claw-top-right::before,
+.decorative-claws .claw-bottom-left::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(205, 165, 0, 0.7);
+  z-index: 2;
+}
+
+.decorative-claws::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.decorative-claws::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.decorative-claws .claw-top-right::before {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.decorative-claws .claw-bottom-left::before {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+/* Styles pour le cadre doré orné */
+.arabic-frame {
+  background-color: rgba(255, 250, 240, 0.8);
+  box-shadow: 0 4px 15px rgba(160, 120, 50, 0.2), 
+              inset 0 0 8px rgba(160, 120, 50, 0.3);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.arabic-frame:hover {
+  transform: translateY(-5px) scale(1.01);
+}
+
+.corner-ornament {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M10 0L20 10L10 20L0 10z' fill='rgba(190, 150, 60, 0.7)'/%3E%3C/svg%3E");
+  background-size: contain;
+  z-index: 5;
+}
+
+.corner-ornament::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M5 0L10 5L5 10L0 5z' fill='rgba(160, 120, 50, 0.9)'/%3E%3C/svg%3E");
+  background-size: contain;
+}
+
+.corner-ornament.top-0.left-0 {
+  top: -5px;
+  left: -5px;
+}
+
+.corner-ornament.top-0.right-0 {
+  top: -5px;
+  right: -5px;
+}
+
+.corner-ornament.bottom-0.left-0 {
+  bottom: -5px;
+  left: -5px;
+}
+
+.corner-ornament.bottom-0.right-0 {
+  bottom: -5px;
+  right: -5px;
+}
+
+.gold-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 215, 0, 0.1),
+    transparent
+  );
+  z-index: 5;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.arabic-text-shadow {
+  text-shadow: 0 2px 5px rgba(160, 120, 50, 0.3);
+  transition: text-shadow 0.3s ease;
+}
+
+.arabic-frame:hover .arabic-text-shadow {
+  text-shadow: 0 3px 8px rgba(190, 150, 60, 0.5);
+}
+
+/* Variable couleur or */
+:root {
+  --gold: #be963c;
+}
+
+/* Couleur or pour les icônes et textes */
+.text-gold {
+  color: var(--gold);
+}
+
+.text-gold\/70 {
+  color: rgba(190, 150, 60, 0.7);
+}
+
+/* Styles décoratifs pour DuaCard */
+.dua-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(190, 150, 60, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dua-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.dua-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.dua-card-content {
+  padding: 1.5rem;
+}
+
+.decorated-separator {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(190, 150, 60, 0.5), transparent);
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.decorated-separator::before,
+.decorated-separator::after {
+  content: '✧';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0 0.5rem;
+}
+
+.decorated-separator::before {
+  left: 45%;
+}
+
+.decorated-separator::after {
+  left: 55%;
+}
+
+/* Styles pour le logo */
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+.logo-svg {
+  filter: drop-shadow(0 0 4px rgba(var(--gold-rgb), 0.3));
+  transition: filter 0.3s ease;
+}
+
+.logo-svg:hover {
+  filter: drop-shadow(0 0 8px rgba(var(--gold-rgb), 0.6));
+  animation: logo-pulse 3s infinite alternate;
+}
+
+.logo-text {
+  margin-left: 0.5rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, var(--gold), var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes logo-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ajouter ces styles à la fin du fichier globals.css */
+
+/* Nouveaux styles pour le design noir et doré islamique */
+:root {
+  --gold: #d4af37;
+  --gold-dark: #aa8c3e;
+  --gold-light: #f0d77b;
+  --gold-rgb: 212, 175, 55;
+  --black-rich: #121212;
+  --black-deep: #000000;
+}
+
+/* Arrière-plans avec motifs islamiques */
+.islamic-pattern {
+  position: relative;
+}
+
+.islamic-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30L30 0Z' fill='%23D4AF37'/%3E%3C/svg%3E");
+  background-size: 30px 30px;
+  background-repeat: repeat;
+}
+
+/* Effets pour texte arabe */
+.arabic-frame {
+  position: relative;
+  padding: 2rem;
+  margin: 2rem auto;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arabic-frame::before,
+.arabic-frame::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.arabic-frame::before {
+  background: radial-gradient(circle at center, rgba(var(--gold-rgb), 0.05) 0%, transparent 70%);
+}
+
+.arabic-frame::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0L24 12L12 24L0 12L12 0Z' fill='%23D4AF37' fill-opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  opacity: 0.1;
+}
+
+/* Sections avec décoration islamique */
+.islamic-section {
+  position: relative;
+  padding: 2rem;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--gold-rgb), 0.2);
+  overflow: hidden;
+}
+
+.islamic-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20L20 0Z' fill='%23D4AF37' fill-opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  z-index: -1;
+}
+
+/* Titres avec décoration dorée */
+.islamic-title {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.islamic-title::before,
+.islamic-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(to var(--direction, right), transparent, var(--gold), transparent);
+}
+
+.islamic-title::before {
+  --direction: right;
+  left: 0;
+}
+
+.islamic-title::after {
+  --direction: left;
+  right: 0;
+}
+
+/* Séparateurs dorés avec ornements */
+.elegant-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.elegant-separator .line {
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.elegant-separator .symbol {
+  margin: 0 1rem;
+  color: var(--gold);
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+/* Effets de brillance pour éléments dorés */
+.gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--gold-rgb), 0.1),
+    transparent
+  );
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Ombre pour texte arabe */
+.arabic-glow {
+  text-shadow: 0 0 5px rgba(var(--gold-rgb), 0.3);
+}
+
+/* Cadres élégants pour blocs d'information */
+.elegant-frame {
+  position: relative;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.elegant-frame::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: inherit;
+  background: linear-gradient(45deg, transparent, rgba(var(--gold-rgb), 0.2), transparent);
+  z-index: -1;
+}
+
+/* Coins ornés pour les cadres */
+.ornate-corners {
+  position: relative;
+}
+
+.ornate-corners::before,
+.ornate-corners::after,
+.ornate-corners .corner::before,
+.ornate-corners .corner::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--gold);
+  border-style: solid;
+  border-width: 0;
+}
+
+.ornate-corners::before {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.ornate-corners::after {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.ornate-corners .corner::before {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.ornate-corners .corner::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* Boutons élégants dorés */
+.elegant-button {
+  position: relative;
+  background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-dark));
+  color: var(--black-rich);
+  font-weight: 500;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.elegant-button:hover {
+  opacity: 0.9;
+}
+
+.elegant-button:active {
+  transform: translateY(1px);
+}
+
+.elegant-button::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.elegant-button:hover::after {
+  opacity: 0.2;
+  transform: scale(1);
+}
+
+/* Texte doré élégant */
+.elegant-golden-text {
+  background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+/* Animation de pulsation subtile */
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.001);
+  }
+}
+
+.subtle-pulse {
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+/* Ajouter à la fin du fichier globals.css */
+
+/* Styles élégants pour le design minimaliste */
+.elegant-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  position: relative;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.elegant-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+.elegant-card {
+  background-color: black;
+  border: 1px solid rgba(var(--gold-rgb), 0.4);
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.elegant-text {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+}
+
+.elegant-section {
+  border-top: 1px solid rgba(var(--gold-rgb), 0.2);
+  padding-top: 3rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.elegant-section::before {
+  content: "❖";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: var(--gold);
+  padding: 0 15px;
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+.elegant-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--gold-rgb), 0.3), transparent);
+  margin: 2rem 0;
+  position: relative;
+}
+
+.elegant-arabic {
+  font-family: "Amiri", "Noto Naskh Arabic", serif;
+  direction: rtl;
+  line-height: 2;
+  text-align: center;
+  color: var(--gold);
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.elegant-arabic:hover {
+  text-shadow: 0 0 5px rgba(var(--gold-rgb), 0.3);
+}
+
+.minimal-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.minimal-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.minimal-list li::before {
+  content: "•";
+  color: var(--gold);
+  opacity: 0.6;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.minimal-button {
+  background: transparent;
+  color: var(--gold);
+  border: none;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.minimal-button:hover {
+  opacity: 1;
+}
+
+.label-elegant {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.elegant-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--gold);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.7;
+}
+
+.corner-top-left {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* Animation subtile pour les titres */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-title {
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* Style pour le texte arabe */
+.arabic-elegant {
+  position: relative;
+  margin: 2rem auto;
+  padding: 2rem 0;
+}
+
+.arabic-elegant::before,
+.arabic-elegant::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+.arabic-elegant::before {
+  top: 0;
+}
+
+.arabic-elegant::after {
+  bottom: 0;
+}
+
+/* Nouvelles animations et styles pour l'interface */
+.animated-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(30, 20, 10, 0.5) 0%, rgba(10, 10, 10, 0.8) 50%, rgba(0, 0, 0, 1) 100%);
+  z-index: -1;
+  overflow: hidden;
+}
+
+.animated-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23be963c' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.rotating-element {
+  animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pulsing-element {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+.card-hover-effect {
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(190, 150, 60, 0.2);
+  border-color: var(--gold);
+}
+
+.scrolling-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L60 30L90 40L60 50L50 80L40 50L10 40L40 30L50 0Z' fill='%23be963c' fill-opacity='0.05'/%3E%3C/svg%3E");
+  animation: scroll 60s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1000px 1000px;
+  }
+}
+
+.golden-button {
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold), var(--gold-light));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.golden-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.golden-button:hover::before {
+  left: 100%;
+}
+
+.glass-card {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(190, 150, 60, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glowing-text {
+  color: var(--gold);
+  text-shadow: 0 0 5px rgba(190, 150, 60, 0.3);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0% {
+    text-shadow: 0 0 5px rgba(190, 150, 60, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(190, 150, 60, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(190, 150, 60, 0.3);
+  }
+}
+
+.sparkling-stars {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  animation: sparkle 5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+.typewriter-effect {
+  overflow: hidden;
+  border-right: 2px solid var(--gold);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--gold) }
+}
+
+.elegant-input {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(190, 150, 60, 0.3);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+}
+
+.elegant-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(190, 150, 60, 0.2);
+}
+
+.elegant-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background: black;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  padding: 2px;
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold), var(--gold-light));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-grow {
+  transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+}
+
+.loading-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-dots div {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: loading-dots 1.5s infinite;
+}
+
+.loading-dots div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading-dots {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.dua-generation-animation {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dua-generation-animation::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 4px solid transparent;
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1.5s ease-in-out infinite;
+}
+
+.dua-generation-animation::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 4px solid transparent;
+  border-right-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1.2s ease-in-out infinite reverse;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.new-loading-indicator {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.new-loading-indicator div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--gold);
+  animation: spinner 1.5s linear infinite;
+}
+
+.new-loading-indicator div:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.new-loading-indicator div:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  animation-delay: 0.2s;
+  animation-direction: reverse;
+}
+
+.new-loading-indicator div:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  animation-delay: 0.4s;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.elegant-title-animation {
+  position: relative;
+  display: inline-block;
+}
+
+.elegant-title-animation::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: reveal-underline 2s ease forwards;
+}
+
+@keyframes reveal-underline {
+  0% {
+    width: 0;
+    left: 50%;
+  }
+  100% {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.islamic-stars-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L46 28L74 34L46 40L40 68L34 40L6 34L34 28L40 0Z' fill='%23be963c' fill-opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  z-index: -1;
+}
+
+.twinkling-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: twinkle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+.text-gradient-animation {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    rgb(250, 220, 150) 35%,
+    var(--gold) 70%,
+    rgb(250, 220, 150) 85%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientShimmer 8s linear infinite;
+}
+
+@keyframes textGradientShimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Style de titre islamique élégant */
+.islamic-title {
+  font-family: var(--font-serif);
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  color: var(--gold);
+}
+
+.islamic-title::before,
+.islamic-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--direction, right), transparent, var(--gold), transparent);
+  opacity: 0.6;
+  max-width: 120px;
+}
+
+.islamic-title::before {
+  --direction: right;
+}
+
+.islamic-title::after {
+  --direction: left;
+}
+
+/* Séparateur élégant */
+.elegant-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.elegant-separator .line {
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(217, 119, 6, 0.3), transparent);
+}
+
+.elegant-separator .symbol {
+  margin: 0 1rem;
+  color: rgba(217, 119, 6, 0.7);
+  font-size: 0.85rem;
+}
+
+/* Fond avec motif islamique */
+.islamic-background-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23bd8c27' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+/* Animation de clignotement pour le curseur */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+  opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 0.8s infinite;
 }
