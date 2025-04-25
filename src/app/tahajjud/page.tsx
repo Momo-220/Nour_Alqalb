@@ -267,8 +267,10 @@ export default function TahajjudPage() {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <FaMoon className="text-amber-400 inline-block mr-2 text-xl" />
-                      <label className="text-amber-300 font-medium text-xl">Heure de Isha</label>
+                      <div className="w-10 h-10 rounded-full bg-[#271403] flex items-center justify-center">
+                        <FaMoon className="text-amber-400 text-xl" />
+                      </div>
+                      <label className="text-amber-300 font-medium text-xl ml-2">Heure de Isha</label>
                     </motion.div>
                   </div>
                   <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
@@ -291,8 +293,10 @@ export default function TahajjudPage() {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <FaSun className="text-amber-400 inline-block mr-2 text-xl" />
-                      <label className="text-amber-300 font-medium text-xl">Heure de Fajr</label>
+                      <div className="w-10 h-10 rounded-full bg-[#271403] flex items-center justify-center">
+                        <FaSun className="text-amber-400 text-xl" />
+                      </div>
+                      <label className="text-amber-300 font-medium text-xl ml-2">Heure de Fajr</label>
                     </motion.div>
                   </div>
                   <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
