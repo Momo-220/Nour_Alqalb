@@ -260,45 +260,49 @@ export default function TahajjudPage() {
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-amber-700/40 rounded-br-sm z-10"></div>
             
             <div className="relative z-20">
-              <div className="grid grid-cols-1 gap-8 mb-8">
+              <div className="grid grid-cols-1 gap-10 mb-10">
                 <div className="text-center relative">
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 bg-gradient-to-r from-[#130A00] via-[#1A0F02] to-[#130A00]">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 bg-gradient-to-r from-[#130A00] via-[#1A0F02] to-[#130A00] z-10">
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <FaMoon className="text-amber-400 inline-block mr-2 text-lg" />
-                      <label className="text-amber-300 font-medium text-lg">Heure de Isha</label>
+                      <FaMoon className="text-amber-400 inline-block mr-2 text-xl" />
+                      <label className="text-amber-300 font-medium text-xl">Heure de Isha</label>
                     </motion.div>
                   </div>
-                  <input
-                    ref={ishaInputRef}
-                    type="time"
-                    defaultValue=""
-                    onChange={(e) => saveTimeToStorage('isha', e.target.value)}
-                    className="w-full p-6 rounded-lg bg-[#0A0500] text-amber-400 border border-amber-700/60 focus:outline-none focus:ring-2 focus:ring-amber-600/50 focus:border-amber-600 text-center text-2xl font-medium transition-all min-h-[70px] touch-manipulation"
-                    style={{ fontSize: '24px' }}
-                  />
+                  <div className="p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
+                    <input
+                      ref={ishaInputRef}
+                      type="time"
+                      defaultValue=""
+                      onChange={(e) => saveTimeToStorage('isha', e.target.value)}
+                      className="w-full p-6 rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all min-h-[80px] touch-manipulation"
+                      style={{ fontSize: '28px', WebkitAppearance: 'none' }}
+                    />
+                  </div>
                 </div>
                 
-                <div className="text-center relative mt-2">
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 bg-gradient-to-r from-[#130A00] via-[#1A0F02] to-[#130A00]">
+                <div className="text-center relative mt-6">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-4 bg-gradient-to-r from-[#130A00] via-[#1A0F02] to-[#130A00] z-10">
                     <motion.div 
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <FaSun className="text-amber-400 inline-block mr-2 text-lg" />
-                      <label className="text-amber-300 font-medium text-lg">Heure de Fajr</label>
+                      <FaSun className="text-amber-400 inline-block mr-2 text-xl" />
+                      <label className="text-amber-300 font-medium text-xl">Heure de Fajr</label>
                     </motion.div>
                   </div>
-                  <input
-                    ref={fajrInputRef}
-                    type="time"
-                    defaultValue=""
-                    onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
-                    className="w-full p-6 rounded-lg bg-[#0A0500] text-amber-400 border border-amber-700/60 focus:outline-none focus:ring-2 focus:ring-amber-600/50 focus:border-amber-600 text-center text-2xl font-medium transition-all min-h-[70px] touch-manipulation"
-                    style={{ fontSize: '24px' }}
-                  />
+                  <div className="p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
+                    <input
+                      ref={fajrInputRef}
+                      type="time"
+                      defaultValue=""
+                      onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
+                      className="w-full p-6 rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all min-h-[80px] touch-manipulation"
+                      style={{ fontSize: '28px', WebkitAppearance: 'none' }}
+                    />
+                  </div>
                 </div>
               </div>
 
