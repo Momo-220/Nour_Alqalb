@@ -73,19 +73,19 @@ export function adaptDuaToDuaData(dua: Dua): DuaData {
       // C'est une chaîne ou un autre type primitif
       const sourceText = String(dua.source);
       
-      // Par défaut, considérer que la source est une référence coranique
-      sourceObject = {
-        type: "quran",
+    // Par défaut, considérer que la source est une référence coranique
+    sourceObject = {
+      type: "quran",
         reference: sourceText
-      };
-      
+    };
+    
       // Détecter le type basé sur le contenu de la source
       const lowerSourceText = sourceText.toLowerCase();
       if (lowerSourceText.includes("hadith") || 
           lowerSourceText.includes("ahadith") ||
           lowerSourceText.includes("bukhari") ||
           lowerSourceText.includes("muslim")) {
-        sourceObject.type = "hadith";
+      sourceObject.type = "hadith";
         
         // Ajouter des détails pour les hadiths connus
         if (lowerSourceText.includes("bukhari")) {
@@ -96,7 +96,7 @@ export function adaptDuaToDuaData(dua: Dua): DuaData {
       }
       
       if (lowerSourceText.includes("sunnah")) {
-        sourceObject.type = "sunnah";
+      sourceObject.type = "sunnah";
       }
     }
   }

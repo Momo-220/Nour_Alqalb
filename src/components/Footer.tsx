@@ -5,7 +5,7 @@ import { IoMdMoon } from 'react-icons/io';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-[#0A0500] text-amber-300/70 border-t border-amber-900/20">
       <div className="container mx-auto px-4 py-12">

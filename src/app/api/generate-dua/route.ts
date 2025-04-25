@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
     console.log("Requête reçue pour générer une dua pour:", intention);
     const result = await generateSimpleDua(intention);
-    
+
     if (!result.success) {
       console.error("Échec de la génération:", result.error);
       return NextResponse.json({
@@ -52,4 +52,4 @@ export async function POST(request: NextRequest) {
       error: error instanceof Error ? error.message : "Erreur inconnue"
     }, { status: 500 });
   }
-}
+} 

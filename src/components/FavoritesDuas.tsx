@@ -42,7 +42,7 @@ export default function FavoritesDuas({ favorites, onRemoveFavorite }: Favorites
       />
     );
   }
-  
+
   return (
     <div className="space-y-6">
       <motion.div 
@@ -51,14 +51,14 @@ export default function FavoritesDuas({ favorites, onRemoveFavorite }: Favorites
         transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
         className="grid grid-cols-1 gap-6"
       >
-        {favorites.map((dua, index) => (
-          <motion.div
+      {favorites.map((dua, index) => (
+        <motion.div
             key={`${dua.id || index}-${dua.translation?.substring(0, 20)}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
             className="bg-[#1B0E02] rounded-xl overflow-hidden border border-amber-900/20 shadow-md"
-          >
+        >
             <div className="p-6">
               <div className="mb-4 text-right">
                 <p className="text-xl font-amiri text-amber-100 leading-relaxed">{dua.arabicText}</p>
@@ -98,16 +98,16 @@ export default function FavoritesDuas({ favorites, onRemoveFavorite }: Favorites
                 </button>
               </div>
               
-              <button 
+              <button
                 onClick={() => onRemoveFavorite(dua)}
                 className="p-2 text-amber-400/80 hover:text-red-400 transition-colors"
                 aria-label="Supprimer des favoris"
               >
                 <FaTrash />
               </button>
-            </div>
-          </motion.div>
-        ))}
+          </div>
+        </motion.div>
+      ))}
       </motion.div>
     </div>
   );

@@ -90,7 +90,7 @@ const RelatedDuas: React.FC<RelatedDuasProps> = ({
               <div className="flex-1">
                 <h4 className="text-amber-400 mb-2 font-medium group-hover:text-amber-300 transition-colors">
                   {relatedDua.title}
-                </h4>
+              </h4>
                 <p className="text-sm text-amber-300/80 mb-1 font-arabic text-right group-hover:text-amber-300 transition-colors line-clamp-1">
                   {relatedDua.arabicText}
                 </p>
@@ -100,8 +100,8 @@ const RelatedDuas: React.FC<RelatedDuasProps> = ({
                 <p className="text-sm text-amber-100/70 group-hover:text-amber-100 transition-colors line-clamp-2">
                   {relatedDua.translation}
                 </p>
-              </div>
-              
+            </div>
+            
               <div className="flex items-center mt-3 md:mt-0 md:ml-4">
                 <motion.div
                   className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-900/10 border border-amber-800/20 text-amber-600/40 group-hover:text-amber-500/80 group-hover:bg-amber-900/20 group-hover:border-amber-700/30 transition-all"
@@ -119,7 +119,7 @@ const RelatedDuas: React.FC<RelatedDuasProps> = ({
               <div className="mt-2 text-right">
                 <span className="text-xs text-amber-500/50 italic">
                   Source: {relatedDua.source}
-                </span>
+                  </span>
               </div>
             )}
           </motion.div>

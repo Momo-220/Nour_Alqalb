@@ -542,7 +542,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 className="bg-[#1B0E02] rounded-xl overflow-hidden border border-amber-900/20 shadow-xl max-w-3xl mx-auto"
-              >
+                    >
                 <div className="p-6 md:p-8">
                   <div className="mb-6 text-right">
                     <p className="text-2xl font-amiri text-amber-100 leading-relaxed">{dailyDua.arabicText}</p>

@@ -251,7 +251,7 @@ export default function ContactPage() {
                     <motion.a 
                       href="#" 
                       target="_blank" 
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer" 
                       whileHover={{ scale: 1.1, y: -3 }}
                       className="w-10 h-10 rounded-full bg-amber-900/20 flex items-center justify-center border border-amber-800/30 text-amber-500 hover:text-amber-300 transition-all"
                     >
@@ -261,7 +261,7 @@ export default function ContactPage() {
                     <motion.a 
                       href="#" 
                       target="_blank" 
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer" 
                       whileHover={{ scale: 1.1, y: -3 }}
                       className="w-10 h-10 rounded-full bg-amber-900/20 flex items-center justify-center border border-amber-800/30 text-amber-500 hover:text-amber-300 transition-all"
                     >

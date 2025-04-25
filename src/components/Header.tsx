@@ -26,22 +26,22 @@ function NavLinks({ pathname }: { pathname: string }) {
   return (
     <nav>
       <ul className="flex space-x-6">
-        {navItems.map((item) => (
+              {navItems.map((item) => (
           <li key={item.href}>
-            <Link 
-              href={item.href} 
-              className={`flex items-center px-2 py-1 rounded-md transition-colors relative ${
-                pathname === item.href 
+                  <Link 
+                    href={item.href} 
+                    className={`flex items-center px-2 py-1 rounded-md transition-colors relative ${
+                      pathname === item.href 
                   ? "text-amber-400" 
                   : "text-white/90 hover:text-amber-300"
-              }`}
-            >
-              <item.icon className="mr-1.5" size={14} />
-              <span>{item.label}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+                    }`}
+                  >
+                    <item.icon className="mr-1.5" size={14} />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
     </nav>
   );
 }
@@ -75,24 +75,24 @@ export default function Header() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center">
+            <div className="flex items-center">
             <Logo />
-          </div>
+            </div>
           
           <div className="hidden md:flex items-center space-x-6">
             <NavLinks pathname={pathname} />
           </div>
           
           <div className="flex items-center">
-            <button
-              onClick={toggleMenu}
+          <button 
+            onClick={toggleMenu}
               className={`md:hidden w-10 h-10 relative focus:outline-none z-50 ${isMenuOpen ? 'text-white' : 'text-amber-400'}`}
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
+          >
               <span className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'}`} />
               <span className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
               <span className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'}`} />
-            </button>
+          </button>
           </div>
         </div>
       </div>

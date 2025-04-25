@@ -75,18 +75,18 @@ function AboutContent() {
         {/* En-tête */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
           <h1 className="text-4xl md:text-5xl font-playfair text-amber-500 mb-4">À Propos de Nour Al-Qalb</h1>
-          
+
           <div className="flex justify-center items-center mb-6">
             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
             <div className="mx-3 text-amber-500">✧</div>
             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-amber-600 to-transparent"></div>
-          </div>
-          
+      </div>
+
           <p className="text-xl text-amber-300/80 max-w-3xl mx-auto">
             Votre guide spirituel pour les invocations islamiques authentiques
           </p>
@@ -100,7 +100,7 @@ function AboutContent() {
             transition={{ duration: 0.7 }}
             className="text-3xl md:text-4xl text-amber-500 font-amiri"
           >
-            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+          بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
           </motion.p>
         </div>
         
@@ -121,15 +121,15 @@ function AboutContent() {
             <h2 className="text-2xl md:text-3xl text-amber-500 mb-6 font-playfair text-center">Notre Mission</h2>
             
             <p className="text-amber-200/90 mb-4 leading-relaxed">
-              Créée pour faciliter l'accès à la spiritualité islamique, notre application de duas vise à enrichir votre connexion avec Allah à travers des invocations authentiques, présentées de manière accessible et éducative.
-            </p>
+            Créée pour faciliter l'accès à la spiritualité islamique, notre application de duas vise à enrichir votre connexion avec Allah à travers des invocations authentiques, présentées de manière accessible et éducative.
+          </p>
             
             <p className="text-amber-200/90 leading-relaxed">
               Nous nous engageons à fournir un contenu fiable, vérifié par des sources authentiques, tout en utilisant les technologies modernes pour rendre l'expérience utilisateur agréable et intuitive. Notre objectif est de vous accompagner dans votre chemin spirituel, où que vous soyez.
             </p>
           </div>
         </motion.section>
-        
+
         {/* Section Fonctionnalités */}
         <section className="mb-20">
           <motion.h2 
@@ -163,14 +163,14 @@ function AboutContent() {
             ))}
           </div>
         </section>
-        
+
         {/* Section Notre Histoire */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7 }}
           className="mb-20 bg-[#0E0700] rounded-xl overflow-hidden border border-amber-900/30 shadow-xl"
-        >
+          >
           <div className="p-8 md:p-10">
             <h2 className="text-2xl text-amber-500 mb-6 font-playfair text-center">Notre Histoire</h2>
             
@@ -189,14 +189,14 @@ function AboutContent() {
             </p>
           </div>
         </motion.section>
-        
+
         {/* Section Notre Approche */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mb-20 bg-[#0E0700] rounded-xl overflow-hidden border border-amber-900/30 shadow-xl"
-        >
+          >
           <div className="p-8 md:p-10">
             <h2 className="text-2xl text-amber-500 mb-6 font-playfair text-center">Notre Approche</h2>
             
@@ -233,7 +233,7 @@ function AboutContent() {
             </ul>
           </div>
         </motion.section>
-      </div>
+        </div>
     </div>
   );
 }

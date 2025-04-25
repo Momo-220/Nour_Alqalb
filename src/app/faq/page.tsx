@@ -36,21 +36,21 @@ const FAQItem = memo(({ question, answer }: { question: string; answer: React.Re
         )}
       </button>
       <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
             transition={{ 
               duration: 0.3,
               ease: [0.04, 0.62, 0.23, 0.98] // Courbe de bézier pour une animation plus fluide
             }}
-            className="p-6 bg-[#1A0F02]"
+          className="p-6 bg-[#1A0F02]"
             style={{ willChange: 'height, opacity' }}
-          >
-            <div className="prose max-w-none text-amber-200/90">{answer}</div>
-          </motion.div>
-        )}
+        >
+          <div className="prose max-w-none text-amber-200/90">{answer}</div>
+        </motion.div>
+      )}
       </AnimatePresence>
     </div>
   );
@@ -166,26 +166,26 @@ const faqItems = [
 
 // Composant pour le footer FAQ
 const ContactFooter = memo(() => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: 0.2 }}
-    className="mt-12 p-8 bg-[#1A0F02] rounded-lg border border-amber-900/50 text-center shadow-md"
+        className="mt-12 p-8 bg-[#1A0F02] rounded-lg border border-amber-900/50 text-center shadow-md"
     style={{ willChange: 'transform, opacity' }}
-  >
-    <h2 className="text-xl font-semibold text-amber-500 mb-4 font-playfair">
-      Vous avez d'autres questions ?
-    </h2>
-    <p className="text-amber-200/80 mb-6">
-      N'hésitez pas à nous contacter si vous avez besoin de plus d'informations
-    </p>
-    <Link
-      href="/contact"
-      className="inline-block px-6 py-3 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 text-amber-100 rounded-lg hover:opacity-90 transition-all"
-    >
-      Nous contacter
-    </Link>
-  </motion.div>
+      >
+        <h2 className="text-xl font-semibold text-amber-500 mb-4 font-playfair">
+          Vous avez d'autres questions ?
+        </h2>
+        <p className="text-amber-200/80 mb-6">
+          N'hésitez pas à nous contacter si vous avez besoin de plus d'informations
+        </p>
+        <Link
+          href="/contact"
+          className="inline-block px-6 py-3 bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 text-amber-100 rounded-lg hover:opacity-90 transition-all"
+        >
+          Nous contacter
+        </Link>
+      </motion.div>
 ));
 
 ContactFooter.displayName = 'ContactFooter';
@@ -264,7 +264,7 @@ function FAQContent() {
               question={item.question} 
               answer={item.answer} 
             />
-          </motion.div>
+    </motion.div>
         ))}
       </div>
       
