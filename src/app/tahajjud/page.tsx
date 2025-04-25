@@ -271,15 +271,17 @@ export default function TahajjudPage() {
                       <label className="text-amber-300 font-medium text-xl">Heure de Isha</label>
                     </motion.div>
                   </div>
-                  <div className="p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
-                    <input
-                      ref={ishaInputRef}
-                      type="time"
-                      defaultValue=""
-                      onChange={(e) => saveTimeToStorage('isha', e.target.value)}
-                      className="w-full p-6 rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all min-h-[80px] touch-manipulation"
-                      style={{ fontSize: '28px', WebkitAppearance: 'none' }}
-                    />
+                  <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
+                    <div className="aspect-square w-full h-full relative flex items-center justify-center">
+                      <input
+                        ref={ishaInputRef}
+                        type="time"
+                        defaultValue=""
+                        onChange={(e) => saveTimeToStorage('isha', e.target.value)}
+                        className="absolute inset-0 w-full h-full rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all"
+                        style={{ fontSize: '28px', WebkitAppearance: 'none' }}
+                      />
+                    </div>
                   </div>
                 </div>
                 
@@ -293,15 +295,17 @@ export default function TahajjudPage() {
                       <label className="text-amber-300 font-medium text-xl">Heure de Fajr</label>
                     </motion.div>
                   </div>
-                  <div className="p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
-                    <input
-                      ref={fajrInputRef}
-                      type="time"
-                      defaultValue=""
-                      onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
-                      className="w-full p-6 rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all min-h-[80px] touch-manipulation"
-                      style={{ fontSize: '28px', WebkitAppearance: 'none' }}
-                    />
+                  <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
+                    <div className="aspect-square w-full h-full relative flex items-center justify-center">
+                      <input
+                        ref={fajrInputRef}
+                        type="time"
+                        defaultValue=""
+                        onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
+                        className="absolute inset-0 w-full h-full rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all"
+                        style={{ fontSize: '28px', WebkitAppearance: 'none' }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
