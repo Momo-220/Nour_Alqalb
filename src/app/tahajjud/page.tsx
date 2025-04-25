@@ -51,6 +51,20 @@ export default function TahajjudPage() {
     }
   }, []);
 
+  // État pour les étoiles scintillantes (généré côté client uniquement)
+  const [stars, setStars] = useState<Array<{ top: string; left: string; delay: number; duration: number }>>([]);
+
+  // Génération des étoiles scintillantes côté client uniquement
+  useEffect(() => {
+    const starsArray = Array.from({ length: 20 }).map(() => ({
+      top: `${10 + Math.random() * 80}%`,
+      left: `${Math.random() * 100}%`,
+      delay: Math.random() * 2,
+      duration: 3 + Math.random() * 2
+    }));
+    setStars(starsArray);
+  }, []);
+
   // Fonction pour sauvegarder les valeurs dans localStorage
   const saveTimeToStorage = (type: 'isha' | 'fajr', value: string) => {
     try {
@@ -146,24 +160,24 @@ export default function TahajjudPage() {
       {/* Arrière-plan avec motifs et étoiles */}
       <div className="absolute inset-0 bg-[url('/images/geometric-pattern.svg')] bg-repeat opacity-5 z-0"></div>
       
-      {/* Étoiles scintillantes */}
+      {/* Étoiles scintillantes - rendu côté client uniquement */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {stars.map((star, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-amber-200 rounded-full"
             style={{
-              top: `${10 + Math.random() * 80}%`,
-              left: `${Math.random() * 100}%`,
+              top: star.top,
+              left: star.left,
             }}
             animate={{
               opacity: [0.1, 0.8, 0.1],
               scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: star.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: star.delay,
             }}
           />
         ))}
@@ -267,22 +281,20 @@ export default function TahajjudPage() {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <div className="w-10 h-10 rounded-full bg-[#271403] flex items-center justify-center">
-                        <FaMoon className="text-amber-400 text-xl" />
-                      </div>
-                      <label className="text-amber-300 font-medium text-xl ml-2">Heure de Isha</label>
+                      <FaMoon className="text-amber-400 inline-block mr-2 text-xl" />
+                      <label className="text-amber-300 font-medium text-xl">Heure de Isha</label>
                     </motion.div>
                   </div>
                   <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
                     <div className="aspect-square w-full h-full relative flex items-center justify-center">
-                      <input
-                        ref={ishaInputRef}
-                        type="time"
-                        defaultValue=""
-                        onChange={(e) => saveTimeToStorage('isha', e.target.value)}
+                  <input
+                    ref={ishaInputRef}
+                    type="time"
+                    defaultValue=""
+                    onChange={(e) => saveTimeToStorage('isha', e.target.value)}
                         className="absolute inset-0 w-full h-full rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all"
                         style={{ fontSize: '28px', WebkitAppearance: 'none' }}
-                      />
+                  />
                     </div>
                   </div>
                 </div>
@@ -293,22 +305,20 @@ export default function TahajjudPage() {
                       whileHover={{ scale: 1.05 }}
                       className="flex items-center"
                     >
-                      <div className="w-10 h-10 rounded-full bg-[#271403] flex items-center justify-center">
-                        <FaSun className="text-amber-400 text-xl" />
-                      </div>
-                      <label className="text-amber-300 font-medium text-xl ml-2">Heure de Fajr</label>
+                      <FaSun className="text-amber-400 inline-block mr-2 text-xl" />
+                      <label className="text-amber-300 font-medium text-xl">Heure de Fajr</label>
                     </motion.div>
                   </div>
                   <div className="aspect-square max-w-[240px] mx-auto p-2 bg-gradient-to-r from-amber-700/20 via-amber-600/20 to-amber-700/20 rounded-full">
                     <div className="aspect-square w-full h-full relative flex items-center justify-center">
-                      <input
-                        ref={fajrInputRef}
-                        type="time"
-                        defaultValue=""
-                        onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
+                  <input
+                    ref={fajrInputRef}
+                    type="time"
+                    defaultValue=""
+                    onChange={(e) => saveTimeToStorage('fajr', e.target.value)}
                         className="absolute inset-0 w-full h-full rounded-full bg-[#0A0500] text-amber-400 border-2 border-amber-600/70 focus:outline-none focus:ring-4 focus:ring-amber-500/40 focus:border-amber-500 text-center text-3xl font-bold transition-all"
                         style={{ fontSize: '28px', WebkitAppearance: 'none' }}
-                      />
+                  />
                     </div>
                   </div>
                 </div>
@@ -368,7 +378,7 @@ export default function TahajjudPage() {
                             animate={{ scale: [0.8, 1.2, 1] }}
                             transition={{ duration: 1, delay: 0.4 }}
                           >
-                      <FaMoon size={20} />
+                            <FaMoon size={20} />
                           </motion.div>
                           <motion.div 
                             className="absolute inset-0 rounded-full"
@@ -377,11 +387,11 @@ export default function TahajjudPage() {
                             }}
                             transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
                           />
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-amber-400 font-medium">Dernier tiers de la nuit</h4>
-                      <p className="text-amber-300/80 flex items-center mt-1">
-                        <FaClock className="mr-2 text-amber-500/70" />
+                        </div>
+                        <div className="ml-4">
+                          <h4 className="text-amber-400 font-medium">Dernier tiers de la nuit</h4>
+                          <p className="text-amber-300/80 flex items-center mt-1">
+                            <FaClock className="mr-2 text-amber-500/70" />
                             <motion.span 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
@@ -390,18 +400,18 @@ export default function TahajjudPage() {
                             >
                               {lastThirdTime}
                             </motion.span>
-                        <span className="mx-1 text-amber-500/50">→</span>
-                        <span>Fajr</span>
+                            <span className="mx-1 text-amber-500/50">→</span>
+                            <span>Fajr</span>
                             <motion.span 
                               initial={{ opacity: 0, x: 5 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.6 }}
                               className="ml-2 px-2 py-0.5 bg-amber-500/10 rounded text-xs text-amber-400/80"
                             >
-                          Recommandé
+                              Recommandé
                             </motion.span>
-                      </p>
-                    </div>
+                          </p>
+                        </div>
                       </motion.div>
                   
                       <motion.div 
@@ -410,13 +420,26 @@ export default function TahajjudPage() {
                         transition={{ delay: 0.4 }}
                         className="flex items-center"
                       >
-                    <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500/80">
-                          <FaRegMoon size={18} />
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-amber-400/90 font-medium">Milieu de la nuit</h4>
-                      <p className="text-amber-300/70 flex items-center mt-1">
-                        <FaClock className="mr-2 text-amber-500/60" />
+                        <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500/80 relative overflow-hidden">
+                          <motion.div 
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: [0.8, 1.1, 0.9] }}
+                            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                          >
+                            <FaRegMoon size={18} />
+                          </motion.div>
+                          <motion.div 
+                            className="absolute inset-0 rounded-full"
+                            animate={{ 
+                              boxShadow: ["0 0 0px 0px rgba(217, 119, 6, 0)", "0 0 10px 1px rgba(217, 119, 6, 0.2)", "0 0 0px 0px rgba(217, 119, 6, 0)"] 
+                            }}
+                            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 0.5 }}
+                          />
+                        </div>
+                        <div className="ml-4">
+                          <h4 className="text-amber-400/90 font-medium">Milieu de la nuit</h4>
+                          <p className="text-amber-300/70 flex items-center mt-1">
+                            <FaClock className="mr-2 text-amber-500/60" />
                             <motion.span 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
@@ -425,8 +448,8 @@ export default function TahajjudPage() {
                             >
                               {middleTime}
                             </motion.span>
-                      </p>
-                    </div>
+                          </p>
+                        </div>
                       </motion.div>
                   
                       <motion.div 

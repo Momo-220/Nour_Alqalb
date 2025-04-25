@@ -153,64 +153,58 @@ export default function RootLayout({
       <body className="bg-[#080400] text-amber-50 font-sans">
         <ThemeProvider>
           <div id="root" className="min-h-screen flex flex-col">
-        <Header />
+            <Header />
             <BackButton />
             <PageTransition>
               <main className="flex-grow pt-20">
-            {children}
+                {children}
               </main>
             </PageTransition>
           </div>
         </ThemeProvider>
         
-        {/* Script d'optimisation de performance */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Amélioration du First Input Delay (FID)
-              document.addEventListener('DOMContentLoaded', function() {
-                // Fonction pour améliorer l'interaction initiale
-                const passiveSupported = false;
-                try {
-                  window.addEventListener("test", null, { 
-                    get passive() { passiveSupported = true; return false; }
-                  });
-                } catch(e) {}
+        {/* Script déplacé dans un composant ClientOnly pour éviter les erreurs d'hydration */}
+        <ClientOnly>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                // Amélioration du First Input Delay (FID)
+                document.addEventListener('DOMContentLoaded', function() {
+                  // Fonction pour améliorer l'interaction initiale
+                  let passiveSupported = false;
+                  try {
+                    window.addEventListener("test", null, { 
+                      get passive() { passiveSupported = true; return false; }
+                    });
+                  } catch(e) {}
+                  
+                  // Optimiser la réactivité des évènements tactiles
+                  const wheelOpt = passiveSupported ? { passive: true } : false;
+                  const wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+                  document.addEventListener(wheelEvent, function() {}, wheelOpt);
+                  document.addEventListener('touchstart', function() {}, wheelOpt);
+                });
                 
-                // Optimiser la réactivité des évènements tactiles
-                const wheelOpt = passiveSupported ? { passive: true } : false;
-                const wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-                document.addEventListener(wheelEvent, function() {}, wheelOpt);
-                document.addEventListener('touchstart', function() {}, wheelOpt);
-              });
-              
-              // Préchargement des images
-              const imagesToPreload = [
-                '/images/geometric-pattern.svg',
-                '/images/mosque-silhouette.png',
-                '/images/geometric-pattern.png',
-                '/icon.svg',
-                '/images/tahajjud-bg.jpg'
-              ];
-              
-              // Préchargeur d'images
-              window.addEventListener('load', function() {
-                imagesToPreload.forEach(src => {
-                  const img = new Image();
-                  img.src = src;
+                // Préchargement des images
+                const imagesToPreload = [
+                  '/images/geometric-pattern.svg',
+                  '/images/mosque-silhouette.png',
+                  '/images/geometric-pattern.png',
+                  '/icon.svg',
+                  '/images/tahajjud-bg.jpg'
+                ];
+                
+                // Préchargeur d'images
+                window.addEventListener('load', function() {
+                  imagesToPreload.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                  });
                 });
-              });
-              
-              // Optimisation du chargement des images
-              if ('loading' in HTMLImageElement.prototype) {
-                const images = document.querySelectorAll('img[loading="lazy"]');
-                images.forEach(img => {
-                  img.src = img.dataset.src;
-                });
-              }
-            `,
-          }}
-        />
+              `
+            }}
+          />
+        </ClientOnly>
       </body>
     </html>
   );
