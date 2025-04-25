@@ -372,20 +372,20 @@ export default function TahajjudPage() {
                         transition={{ delay: 0.3 }}
                         className="flex items-center"
                       >
-                        <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500 relative overflow-hidden">
+                        <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500/80 relative overflow-hidden">
                           <motion.div 
                             initial={{ scale: 0.8 }}
-                            animate={{ scale: [0.8, 1.2, 1] }}
-                            transition={{ duration: 1, delay: 0.4 }}
+                            animate={{ scale: [0.8, 1.1, 0.9] }}
+                            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
                           >
-                            <FaMoon size={20} />
+                            <FaMoon size={18} />
                           </motion.div>
                           <motion.div 
                             className="absolute inset-0 rounded-full"
                             animate={{ 
-                              boxShadow: ["0 0 0px 0px rgba(217, 119, 6, 0)", "0 0 15px 2px rgba(217, 119, 6, 0.3)", "0 0 0px 0px rgba(217, 119, 6, 0)"] 
+                              boxShadow: ["0 0 0px 0px rgba(217, 119, 6, 0)", "0 0 10px 1px rgba(217, 119, 6, 0.2)", "0 0 0px 0px rgba(217, 119, 6, 0)"] 
                             }}
-                            transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 0.5 }}
                           />
                         </div>
                         <div className="ml-4">
