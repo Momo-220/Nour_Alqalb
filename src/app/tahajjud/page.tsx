@@ -373,20 +373,7 @@ export default function TahajjudPage() {
                         className="flex items-center"
                       >
                         <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500/80 relative overflow-hidden">
-                          <motion.div 
-                            initial={{ scale: 0.8 }}
-                            animate={{ scale: [0.8, 1.1, 0.9] }}
-                            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                          >
-                            <FaMoon size={18} />
-                          </motion.div>
-                          <motion.div 
-                            className="absolute inset-0 rounded-full"
-                            animate={{ 
-                              boxShadow: ["0 0 0px 0px rgba(217, 119, 6, 0)", "0 0 10px 1px rgba(217, 119, 6, 0.2)", "0 0 0px 0px rgba(217, 119, 6, 0)"] 
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 0.5 }}
-                          />
+                          <FaMoon size={18} />
                         </div>
                         <div className="ml-4">
                           <h4 className="text-amber-400 font-medium">Dernier tiers de la nuit</h4>
@@ -421,20 +408,7 @@ export default function TahajjudPage() {
                         className="flex items-center"
                       >
                         <div className="w-12 h-12 rounded-full bg-[#271403] flex items-center justify-center text-amber-500/80 relative overflow-hidden">
-                          <motion.div 
-                            initial={{ scale: 0.8 }}
-                            animate={{ scale: [0.8, 1.1, 0.9] }}
-                            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                          >
-                            <FaRegMoon size={18} />
-                          </motion.div>
-                          <motion.div 
-                            className="absolute inset-0 rounded-full"
-                            animate={{ 
-                              boxShadow: ["0 0 0px 0px rgba(217, 119, 6, 0)", "0 0 10px 1px rgba(217, 119, 6, 0.2)", "0 0 0px 0px rgba(217, 119, 6, 0)"] 
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 0.5 }}
-                          />
+                          <FaRegMoon size={18} />
                         </div>
                         <div className="ml-4">
                           <h4 className="text-amber-400/90 font-medium">Milieu de la nuit</h4>
