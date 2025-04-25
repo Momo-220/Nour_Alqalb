@@ -129,6 +129,13 @@ export default function RootLayout({
         <link rel="preload" href="/images/mosque-silhouette.png" as="image" />
         <link rel="preload" href="/images/geometric-pattern.png" as="image" />
         
+        {/* Favicon et icônes d'application */}
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="mask-icon" href="/icon.svg" color="#BD8C27" />
+        <meta name="msapplication-TileColor" content="#080400" />
+        <meta name="msapplication-TileImage" content="/icon.svg" />
+        
         {/* DNS prefetch pour améliorer les performances réseau */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />

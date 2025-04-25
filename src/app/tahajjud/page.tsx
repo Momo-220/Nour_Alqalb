@@ -172,13 +172,7 @@ export default function TahajjudPage() {
       <header className="py-6 border-b border-amber-900/30 relative z-10">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-amber-400 hover:text-amber-300 transition-all"
-            >
-              <FaArrowLeft size={14} />
-              <span className="font-medium">Retour</span>
-            </Link>
+            <div className="w-[110px]"></div>
             
             <div className="flex justify-center">
               <Logo size="lg" />

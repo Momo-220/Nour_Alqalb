@@ -3,18 +3,14 @@
   "short_name": "Nour Al-Qalb",
   "icons": [
     {
-      "src": "/icons/android-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/android-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#be963c",
-  "background_color": "#ffffff",
+  "theme_color": "#BD8C27",
+  "background_color": "#080400",
   "display": "standalone",
   "start_url": "/",
   "description": "Trouvez les mots pour parler à Allah, à tout moment."
